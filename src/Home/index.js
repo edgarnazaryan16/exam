@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { API } from "./helpers";
 import "./style.css"
+import Card from "./Card";
 const Home = () => {
     const [inputValue, setInputValue] = useState('');
     const [countries, setCountries] = useState([]);
@@ -10,7 +11,7 @@ const Home = () => {
             const data = await response.json();
             setCountries(data)
         } catch {
-            console.log("Page Not Found")
+            console.log(Error)
         }
         
     }
@@ -23,7 +24,7 @@ const Home = () => {
     return (
         <>
             <div>
-                <input value={inputValue} onChange={(e) => handleInputChange(e)}/>
+                <input type="text" value={inputValue} onChange={handleInputChange}/>
             </div>
             {countries.status === 404 ? <>Page Not Found</> : <div>
                 <table>
@@ -37,14 +38,11 @@ const Home = () => {
                     </thead>
                     <tbody>
                         {
-                            countries.map(({name: {common}, timezones, languages, flags:{png, alt}, ccn3}) => {
-                                console.log(languages)
-                                return (<tr key={ccn3}>
-                                    <td>{common}</td>
-                                    <td>{timezones.join(', ')}</td>
-                                    <td>{languages ? Object.values(languages).join(', ') : ''}</td>
-                                    <td><img src={png} alt={alt}/></td>
-                                </tr>)
+                            countries.map((item) => {
+                                return <Card 
+                                    key={item.ccn3}
+                                    {...item}
+                                />
                             })
                         }
                     </tbody>
