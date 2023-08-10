@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 30px;
+}
+img {
+    width: 100px;
+    height: 100px;
+}
+input {
+    margin: 20px;
+}
+thead, tbody, tr, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    word-wrap: break-word;
+}
